@@ -6,9 +6,11 @@ import JPEGEncoder as en
 def combine():
     imagelist = sorted(glob.glob("temp/*.png"))
 
-    result = en.compress(cv2.imread(imagelist[0]))
-    detector = cv2.xfeatures2d.SURF_create(300)
 
+    # surf and sift problematic with patent issues, so check ORB, BRIEF, BRISK, FREAK, KAZE, AKAZE
+    result = en.compress(cv2.imread(imagelist[0]))
+    detector = cv2.ORB_create(nfeatures=10000, scoreType = cv2.ORB_FAST_SCORE)
+ 
     for i in range(1, len(imagelist)):
         image = en.compress(cv2.imread(imagelist[i]))
 

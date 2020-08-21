@@ -14,7 +14,7 @@ def combine(image1, image2, detector):
 
 
     '''
-    detector = cv2.xfeatures2d.SURF_create(10)
+    detector = cv2.ORB_create(nfeatures=10000, score = cv2.ORB_FAST_SCORE) #SURF showed best results
     >>>>>>> 01bb016deff80f1a90292757a521e2b8ee47594d
     '''
 

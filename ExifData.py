@@ -1,5 +1,6 @@
 import os, glob
 from PIL import Image
+import PIL
 from PIL.ExifTags import TAGS, GPSTAGS
 from binascii import hexlify
 
@@ -34,17 +35,14 @@ def _convert_to_degress(value):
     """
     Helper function to convert the GPS coordinates stored in the EXIF to degress in float format
     """
-    d0 = value[0][0]
-    d1 = value[0][1]
-    d = float(d0) / float(d1)
+    d0 = value[0]
+    d = float(d0) 
 
-    m0 = value[1][0]
-    m1 = value[1][1]
-    m = float(m0) / float(m1)
+    m0 = value[1]
+    m = float(m0) 
 
-    s0 = value[2][0]
-    s1 = value[2][1]
-    s = float(s0) / float(s1)
+    s0 = value[2]
+    s = float(s0)
 
     return d + (m / 60.0) + (s / 3600.0)
 
@@ -79,7 +77,7 @@ def get_lat_lon(exif_data):
             if gps_longitude_ref != "E":
                 lon = 0 - lon
 
-            alt = gps_altitude[0]/gps_altitude[1]
+            alt = gps_altitude
             if hexlify(gps_altitude_ref) == 0 :
                 alt = 0 - alt
 
